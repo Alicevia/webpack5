@@ -1,20 +1,24 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
 const PCP = require('purgecss-webpack-plugin')
+
+const { entry,srcPath,pagesAllFile } = require('./config')
+
 module.exports = {
   // 目前 webpack-dev-server 在配置 browserslist 的时候无法启用 live reloading & HMR, 需要加上下面的配置
   target: process.env.NODE_ENV === 'development' ? 'web' : 'browserslist',
-  context: resolve(__dirname, '../src'),
-  entry: () => ({
-    index: {
-      import: './pages/index/index.js',
-      dependOn: 'shared',
-    },
-    app: {
-      import: './pages/page1/page1.js'
-    },
-    shared: ['axios']
-  }),
+  context: srcPath,
+  entry,
+  // entry: () => ({
+  //   index: {
+  //     import: './pages/index/index.js',
+  //     dependOn: 'shared',
+  //   },
+  //   app: {
+  //     import: './pages/page1/page1.js'
+  //   },
+  //   shared: ['axios']
+  // }),
 
   module: {
     rules: [
@@ -57,6 +61,8 @@ module.exports = {
     ]
   },
   plugins: [
-    // new PCP()
+    new PCP(
+      { paths: pagesAllFile }
+    )
   ]
 }

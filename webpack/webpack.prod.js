@@ -2,7 +2,9 @@ const { resolve } = require('path')
 const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.base')
 const { CleanWebpackPlugin: CWP } = require('clean-webpack-plugin')
-const HWP = require('html-webpack-plugin')
+const MCEP = require('mini-css-extract-plugin')
+
+const {HWP} = require('./config')
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -16,18 +18,37 @@ module.exports = merge(baseConfig, {
   cache: {
     type: 'memory',
   },
+  module:{
+    rules:[
+      {
+        test: /\.css$/,
+        use: [
+            MCEP.loader,
+            'css-loader',
+            'postcss-loader',
+            {
+                loader: 'px2rem-loader',
+                options: {
+                    remUnit: 75,
+                    remPrecision: 8,
+                },
+            },
+        ],
+    },
+    ]
+  },
   plugins: [
+    new MCEP({
+      filename:'css/[name]_[contenthash:8].css',
+      chunkFilename: 'css/[name].[contenthash].css',
+    }),
     new CWP(),
-    new HWP({
-      title: 'index',
-      filename: 'index.html',
-      chunks: ['index', 'shared'],
-    }),
-    new HWP({
-      title: 'app',
-      filename: 'app.html',
-      chunks: ['app'],
-    }),
+    ...HWP
+    // new HWP({
+    //   title: 'app',
+    //   filename: 'app.html',
+    //   chunks: ['app'],
+    // }),
 
   ]
 })
