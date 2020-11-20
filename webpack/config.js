@@ -33,6 +33,7 @@ const getEntries = (filenameAry, shared, dependOn) => {
 }
 exports.entry = getEntries(filenameAry, shared, dependOn)
 
+
 const getHWP = (filenameAry) => {
   const HWPAry = []
   filenameAry.forEach(name => {
