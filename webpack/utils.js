@@ -1,9 +1,9 @@
 
 const glob = require('glob')
 
-exports.generateFileName=(pages)=>{
+exports.generateFileName = (pages) => {
   let filenameAry = []
-  let filePath=[]
+  let filePath = []
   let reg = /(.*\/)*([^.]+).(js|ts)/ig
   glob.sync(pages).forEach(item => {
     if (reg.test(item)) {
@@ -12,6 +12,6 @@ exports.generateFileName=(pages)=>{
     }
   })
   return {
-    filenameAry,filePath
+    filenameAry, filePath
   }
 }
