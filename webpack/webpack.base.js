@@ -18,7 +18,11 @@ module.exports = {
   //   },
   //   shared: ['axios']
   // }),
-
+  resolve: {
+    alias: {
+      '@': srcPath
+    }
+  },
   module: {
     rules: [
       {
