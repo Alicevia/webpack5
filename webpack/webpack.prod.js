@@ -3,8 +3,9 @@ const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.base')
 const { CleanWebpackPlugin: CWP } = require('clean-webpack-plugin')
 const MCEP = require('mini-css-extract-plugin')
+const PCP = require('purgecss-webpack-plugin')
 
-const {HWP} = require('./config')
+const {HWP,pagesAllFile} = require('./config')
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -38,6 +39,9 @@ module.exports = merge(baseConfig, {
     ]
   },
   plugins: [
+    new PCP({
+      paths: pagesAllFile 
+    }),
     new MCEP({
       filename:'css/[name]_[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash].css',

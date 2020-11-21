@@ -1,6 +1,5 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
-const PCP = require('purgecss-webpack-plugin')
 
 const { entry,srcPath,pagesAllFile } = require('./config')
 
@@ -61,8 +60,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new PCP(
-      { paths: pagesAllFile }
-    )
+  
   ]
 }
