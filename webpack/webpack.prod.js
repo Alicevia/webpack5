@@ -5,7 +5,7 @@ const { CleanWebpackPlugin: CWP } = require('clean-webpack-plugin')
 const MCEP = require('mini-css-extract-plugin')
 const PCP = require('purgecss-webpack-plugin')
 
-const {HWP,pagesAllFile} = require('./config')
+const { HWP, pagesAllFile } = require('./config')
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -14,36 +14,35 @@ module.exports = merge(baseConfig, {
   output: {
     filename: 'js/[name].js',
     path: resolve(__dirname, '../dist'),
-    assetModuleFilename: 'images/[hash][ext][query]'
+    assetModuleFilename: 'images/[hash][ext][query]',
   },
-  cache: {
-    type: 'memory',
-  },
-  module:{
-    rules:[
+
+  externals: [],
+  module: {
+    rules: [
       {
         test: /\.css$/,
         use: [
-            MCEP.loader,
-            'css-loader',
-            'postcss-loader',
-            {
-                loader: 'px2rem-loader',
-                options: {
-                    remUnit: 75,
-                    remPrecision: 8,
-                },
+          MCEP.loader,
+          'css-loader',
+          'postcss-loader',
+          {
+            loader: 'px2rem-loader',
+            options: {
+              remUnit: 75,
+              remPrecision: 8,
             },
+          },
         ],
-    },
+      },
     ]
   },
   plugins: [
     new PCP({
-      paths: pagesAllFile 
+      paths: pagesAllFile
     }),
     new MCEP({
-      filename:'css/[name]_[contenthash:8].css',
+      filename: 'css/[name]_[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash].css',
     }),
     new CWP(),

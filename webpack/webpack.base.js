@@ -23,6 +23,7 @@ module.exports = {
       '@': srcPath
     }
   },
+
   module: {
     rules: [
       {
@@ -94,6 +95,7 @@ module.exports = {
           reuseExistingChunk: true,
           minSize: 0,
         },
+
       },
     },
   },
