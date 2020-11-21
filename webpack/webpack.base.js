@@ -1,12 +1,12 @@
 const { resolve, join } = require('path')
 const webpack = require('webpack')
-
+const PCP = require('postcss-preset-env')
 const { entry, srcPath, pagesAllFile } = require('./config')
 
 module.exports = {
   // 目前 webpack-dev-server 在配置 browserslist 的时候无法启用 live reloading & HMR, 需要加上下面的配置
   target: process.env.NODE_ENV === 'development' ? 'web' : 'browserslist',
-  // context: srcPath,
+  context: srcPath,
   entry,
   // entry: () => ({
   //   index: {
