@@ -27,13 +27,14 @@ module.exports = merge(baseConfig, {
           'style-loader',
           'css-loader',
           'postcss-loader',
-          {
-            loader: 'px2rem-loader',
-            options: {
-              remUnit: 75,
-              remPrecision: 8,
-            },
-          },
+
+          // {
+          //   loader: 'px2rem-loader',
+          //   options: {
+          //     remUnit: 75,
+          //     remPrecision: 8,
+          //   },
+          // },
         ],
       },
       {

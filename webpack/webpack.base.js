@@ -81,19 +81,26 @@ module.exports = {
       automaticNameDelimiter: '~',
       usedExports: true,
       cacheGroups: {
+        // 新的 chunk 被复用，或者来自 node_modules 目录。
+        // 新的 chunk 大于 30Kb(min+gzip前）。
+        // 按需加载 chunk 的并发请求数量小于等于 5 个。
+        // 页面初始加载时的并发请求数量小于等于 3 个。
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
-          minChunks: 2,
-          priority: -10,
+          minChunks: 2,//只要引入了包就打到venders里
+          priority: 10,
           reuseExistingChunk: true,
         },
-        common: {
+        common: {//同一个文件被其他模块引入了2次就被打包进这里
           minChunks: 2,
-          priority: -20,
+          priority: 9,
           name: 'common',
           reuseExistingChunk: true,
           minSize: 0,
+        },
+        default: {
+          filename: 'js/default.js'
         },
 
       },

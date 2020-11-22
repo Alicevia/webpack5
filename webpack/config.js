@@ -10,10 +10,10 @@ let shared = {
   import: ['axios'],
 }
 let dependOn = [
-  'index', 'page2'
+  'index', 'page1'
 ]//'all'
-dependOn = []
-shared = {}
+// dependOn = []
+// shared = {}
 // ======================================== lu
 const { filePath, filenameAry } = generateFileName(pagesPath)
 const getEntries = (filenameAry, shared, dependOn) => {

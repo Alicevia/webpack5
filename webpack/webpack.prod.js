@@ -26,13 +26,13 @@ module.exports = merge(baseConfig, {
           MCEP.loader,
           'css-loader',
           'postcss-loader',
-          {
-            loader: 'px2rem-loader',
-            options: {
-              remUnit: 75,
-              remPrecision: 8,
-            },
-          },
+          // {
+          //   loader: 'px2rem-loader',
+          //   options: {
+          //     remUnit: 75,
+          //     remPrecision: 8,
+          //   },
+          // },
         ],
       },
     ]
@@ -43,7 +43,7 @@ module.exports = merge(baseConfig, {
     }),
     new MCEP({
       filename: 'css/[name]_[contenthash:8].css',
-      chunkFilename: 'css/[name].[contenthash].css',
+      chunkFilename: 'css/[name].[contenthash:4].css',
     }),
     new CWP(),
     ...HWP
