@@ -1,8 +1,8 @@
 const { resolve, join } = require('path')
 const webpack = require('webpack')
-const PCP = require('postcss-preset-env')
-const { entry, srcPath, pagesAllFile } = require('./config')
-const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin')
+const PCP = require('purgecss-webpack-plugin')
+
+const { entry, srcPath, pagesAllFile, HWP } = require('./config')
 module.exports = {
   // 目前 webpack-dev-server 在配置 browserslist 的时候无法启用 live reloading & HMR, 需要加上下面的配置
   target: process.env.NODE_ENV === 'development' ? 'web' : 'browserslist',
@@ -68,18 +68,14 @@ module.exports = {
     new webpack.ProvidePlugin({
       // _axios : 'axios',
     }),
-
-    new webpack.DllReferencePlugin({
-      manifest:resolve(__dirname,'../dll/manifest.json')
-    }),
+    // new webpack.DllReferencePlugin({
+    //   manifest:resolve(__dirname,'../dll/manifest.json')
+    // }),
     // new AddAssetHtmlWebpackPlugin({
     //   filepath: resolve(__dirname, '../dll/*.dll.js')  
     // }),
- 
-
-    new PCP(
-      { paths: pagesAllFile }
-    )
+    new PCP({ paths: pagesAllFile }),//css useless
+    ...HWP,
   ],
   optimization: {
     // 代码分割
@@ -105,7 +101,7 @@ module.exports = {
           reuseExistingChunk: true,
         },
         common: {//同一个文件被其他模块引入了2次就被打包进这里
-          test:/[\\/]src[\\/]/,
+          test: /[\\/]src[\\/]/,
           minChunks: 2,
           priority: 9,
           name: 'common',

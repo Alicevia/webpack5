@@ -1,13 +1,13 @@
 const { resolve } = require('path')
 const { merge } = require('webpack-merge')
-const baseConfig = require('./webpack.base')
-const { CleanWebpackPlugin: CWP } = require('clean-webpack-plugin')
 const MCEP = require('mini-css-extract-plugin')
-const PCP = require('purgecss-webpack-plugin')
-const TWP = require('terser-webpack-plugin')
 const CMWP = require('css-minimizer-webpack-plugin')
 
-const { HWP, pagesAllFile } = require('./config')
+const TWP = require('terser-webpack-plugin')
+
+const { CleanWebpackPlugin: CWP } = require('clean-webpack-plugin')
+const baseConfig = require('./webpack.base')
+
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -42,16 +42,12 @@ module.exports = merge(baseConfig, {
     ]
   },
   plugins: [
-    new PCP({
-      paths: pagesAllFile
-    }),
+    new CWP(),
+
     new MCEP({
       filename: 'css/[name]_[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash:4].css',
     }),
-    new CWP(),
-    ...HWP,
-
     // new HWP({
     //   title: 'app',
     //   filename: 'app.html',
@@ -59,9 +55,9 @@ module.exports = merge(baseConfig, {
     // }),
 
   ],
-  optimization:{
-    minimize:true,
-    minimizer:[
+  optimization: {
+    minimize: true,
+    minimizer: [
       new TWP({
         parallel: true, // 开启并行压缩
         extractComments: false, // 不生成 license.text
