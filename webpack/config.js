@@ -12,8 +12,8 @@ let shared = {
 let dependOn = [
   'index', 'page1'
 ]//'all'
-// dependOn = []
-// shared = {}
+dependOn = []
+shared = {}
 // ======================================== lu
 const { filePath, filenameAry } = generateFileName(pagesPath)
 const getEntries = (filenameAry, shared, dependOn) => {
@@ -48,7 +48,6 @@ const getHWP = (filenameAry, dependOn) => {
   }
   const HWPAry = []
   filenameAry.forEach(name => {
-
     HWPAry.push(
       new HWP({
         inlineSource: '.css$',
@@ -56,7 +55,7 @@ const getHWP = (filenameAry, dependOn) => {
         filename: `${name}.html`,
         template: resolve(srcPath, `./pages/${name}/${name}.html`),
         chunks: [name, dependOn === 'shared' ? dependOn : dependOn.includes(name) ? 'shared' : ''],
-        excludeChunks: ['common'], // 这里有个没有解决的问题就是 splitChunk 分离出来的包会加到所有入口中去，即使该入口中没有用到这个模块
+       // excludeChunks: ['common1'], // 这里有个没有解决的问题就是 splitChunk 分离出来的包会加到所有入口中去，即使该入口中没有用到这个模块
         inject: true,
         minify: {
           html5: true,

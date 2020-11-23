@@ -4,6 +4,7 @@ body {
 }
 
 .text {
+  display: flex;
     width: 150px;
     height: 64px; /*px*/
     font-size: 28px; /*px*/

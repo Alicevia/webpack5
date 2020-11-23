@@ -1,4 +1,4 @@
-// import { sum } from '@/utils/computed.js'
+import { sum } from '@/utils/computed.js'
 import axios from 'axios'
 console.log(axios)
 console.log(sum(1, 1))
