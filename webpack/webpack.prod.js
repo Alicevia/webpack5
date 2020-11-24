@@ -21,7 +21,7 @@ module.exports = merge(baseConfig, {
     assetModuleFilename: 'images/[hash][ext][query]',
   },
 
-  externals: ['axios'],//axios不打包 这个地方要注意，
+  externals: ['axios'],//axios不打包 这个地方要注意vender优先级低于该配置 只要配置了vender就不会有
   module: {
     rules: [
       {
@@ -59,8 +59,17 @@ module.exports = merge(baseConfig, {
     minimize: true,
     minimizer: [
       new TWP({
-        parallel: true, // 开启并行压缩
+        //开启多线程提升速度
         extractComments: false, // 不生成 license.text
+        parallel: true,
+        terserOptions: {
+          compress: {
+            unused: true,
+            drop_debugger: true,
+            drop_console: true,
+            dead_code: true,
+          }
+        }
       }),
       new CMWP({
         parallel: true, // 开启并行压缩
