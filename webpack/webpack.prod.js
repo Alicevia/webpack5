@@ -4,8 +4,9 @@ const MCEP = require('mini-css-extract-plugin')
 const CMWP = require('css-minimizer-webpack-plugin')
 
 const TWP = require('terser-webpack-plugin')
-
+const CompressionPlugin = require('compression-webpack-plugin');
 const { CleanWebpackPlugin: CWP } = require('clean-webpack-plugin')
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const baseConfig = require('./webpack.base')
 
 
@@ -42,8 +43,16 @@ module.exports = merge(baseConfig, {
     ]
   },
   plugins: [
-    new CWP(),
+    new HtmlWebpackTagsPlugin({
 
+      tags: [
+        'https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js'
+      ],
+      publicPath: false
+
+    }),
+    new CWP(),
+    new CompressionPlugin(),
     new MCEP({
       filename: 'css/[name]_[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash:4].css',
