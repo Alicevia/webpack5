@@ -10,6 +10,11 @@ root.addEventListener('click', () => {
   })
 })
 
+// class A { }
+function* a() {
+  yield '2'
+}
+
 if (module.hot) {
   module.hot.accept()
 }
