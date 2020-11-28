@@ -8,7 +8,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const { CleanWebpackPlugin: CWP } = require('clean-webpack-plugin')
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const baseConfig = require('./webpack.base')
-
+const { config } = require('./config')
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -22,7 +22,7 @@ module.exports = merge(baseConfig, {
     assetModuleFilename: 'images/[hash][ext][query]',
   },
 
-  externals: ['axios',],//axios不打包 这个地方要注意vender优先级低于该配置 只要配置了vender就不会有
+  externals: config.prod.externals,//axios不打包 这个地方要注意vender优先级低于该配置 只要配置了vender就不会有
   module: {
     rules: [
       {
@@ -45,8 +45,8 @@ module.exports = merge(baseConfig, {
   plugins: [
     new HtmlWebpackTagsPlugin({
       tags: [
-        'https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js',
-        'https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.common.dev.min.js'
+        // 'https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js',
+        // 'https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.common.dev.min.js'
       ],
       publicPath: false,//可以配置通用的地址https
     }),

@@ -1,12 +1,11 @@
-const { resolve, join } = require('path')
 const webpack = require('webpack')
 const PCP = require('purgecss-webpack-plugin')
 
-const { entry, srcPath, pagesAllFile, HWP } = require('./config')
+const { entry, config, pagesAllFile, HWP } = require('./config')
 module.exports = {
   // 目前 webpack-dev-server 在配置 browserslist 的时候无法启用 live reloading & HMR, 需要加上下面的配置
   target: process.env.NODE_ENV === 'development' ? 'web' : 'browserslist',
-  context: srcPath,
+  context: config.base.srcPath,
   entry,
   // entry: () => ({
   //   index: {
@@ -20,7 +19,7 @@ module.exports = {
   // }),
   resolve: {
     alias: {
-      '@': srcPath
+      '@': config.base.srcPath
     }
   },
 
@@ -93,7 +92,7 @@ module.exports = {
         // 新的 chunk 大于 30Kb(min+gzip前）。
         // 按需加载 chunk 的并发请求数量小于等于 5 个。
         // 页面初始加载时的并发请求数量小于等于 3 个。
-        vendors: {
+        vendors: {//dev的时候可以直接导入 prod的时候直接使用cdn
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
           minChunks: 2,//只要引入了包就打到venders里
