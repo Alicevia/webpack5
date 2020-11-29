@@ -63,9 +63,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       // _axios : 'axios',
     }),
-    // new webpack.DllReferencePlugin({
-    //   manifest:resolve(__dirname,'../dll/manifest.json')
-    // }),
+
     // new AddAssetHtmlWebpackPlugin({
     //   filepath: resolve(__dirname, '../dll/*.dll.js')  
     // }),
