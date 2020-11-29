@@ -34,7 +34,6 @@ const config = {
   }
 }
 
-console.log(config)
 const { filePath, filenameAry } = generateFileName(config.base.pagesPath)
 exports.config = config
 exports.pagesAllFile = glob.sync(`${config.base.srcPath}/pages/**/*`, { nodir: true })
