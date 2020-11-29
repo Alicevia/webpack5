@@ -56,11 +56,7 @@ module.exports = merge(baseConfig, {
       filename: 'css/[name]_[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash:4].css',
     }),
-    // new HWP({
-    //   title: 'app',
-    //   filename: 'app.html',
-    //   chunks: ['app'],
-    // }),
+
 
   ],
   optimization: {

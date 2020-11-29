@@ -17,11 +17,7 @@ module.exports = {
   //   },
   //   shared: ['axios']
   // }),
-  resolve: {
-    alias: {
-      '@': config.base.srcPath
-    }
-  },
+  resolve: config.base.resolve,
 
   module: {
     rules: [

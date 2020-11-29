@@ -2,6 +2,7 @@ const { resolve } = require('path')
 const { merge } = require('webpack-merge')
 const webpack = require('webpack')
 const baseConfig = require('./webpack.base')
+const { config } = require('./config')
 
 
 module.exports = merge(baseConfig, {
@@ -11,23 +12,17 @@ module.exports = merge(baseConfig, {
   //inline-source-map base64格式 没有单独文件
   // cheap-module-eval-source-map dev
   //cheap-module-source-map prod可以用来查看错误问题
-// 参数	参数解释
-// eval	打包后的模块都使用 eval() 执行，行映射可能不准；不产生独立的 map 文件
-// cheap	map 映射只显示行不显示列，忽略源自 loader 的 source map
-// inline	映射文件以 base64 格式编码，加在 bundle 文件最后，不产生独立的 map 文件
-// module	增加对 loader source map 和第三方模块的映射
+  // 参数	参数解释
+  // eval	打包后的模块都使用 eval() 执行，行映射可能不准；不产生独立的 map 文件
+  // cheap	map 映射只显示行不显示列，忽略源自 loader 的 source map
+  // inline	映射文件以 base64 格式编码，加在 bundle 文件最后，不产生独立的 map 文件
+  // module	增加对 loader source map 和第三方模块的映射
   output: {
     filename: 'js/[name].js',
     path: resolve(__dirname, '../dist'),
     assetModuleFilename: 'images/[hash][ext][query]'
   },
-  devServer: {
-    contentBase: './dist',
-    host: 'localhost',
-    hot: true,
-    open: true,
-    openPage: '',//以contentBase为根文件夹
-  },
+  devServer: config.dev.devServer,
   module: {
     rules: [
       {

@@ -2,6 +2,7 @@
 const glob = require('glob')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { resolve } = require('path')
+
 exports.generateFileName = (pages) => {
   let filenameAry = []
   let filePath = []
