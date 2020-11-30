@@ -6,10 +6,11 @@ const { resolve } = require('path')
 exports.generateFileName = (pages) => {
   let filenameAry = []
   let filePath = []
-  let reg = /(.*\/)*([^.]+).(js|ts)/ig
+  let reg = /(.*\/)*([^.]+).(js|ts|jsx)$/ig
   glob.sync(pages).forEach(item => {
     if (reg.test(item)) {
       filePath.push(item)
+      console.log('xx', item.replace(reg, '$2'))
       filenameAry.push(item.replace(reg, '$2'))
     }
   })
@@ -38,7 +39,6 @@ exports.getEntries = (filenameAry, filePath, venders = [], dependOns = {}) => {
       entry[name].dependOn = dependOns[name]
     }
   })
-  console.log(entry)
 
   // entry: () => ({
   //   index: {
@@ -64,7 +64,6 @@ exports.getHWP = (filenameAry, dependOns, srcPath) => {
     // } else {
     //   chunks.push(name)
     // }
-    console.log(dependOns[name])
     HWPAry.push(
       new HtmlWebpackPlugin({
         inlineSource: '.css$',
