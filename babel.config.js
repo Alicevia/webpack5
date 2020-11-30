@@ -10,6 +10,14 @@ module.exports = function (api) {
         modules: false, // for tree shaking
       },
     ],
+    [
+      "@babel/preset-react",
+      {
+        "pragma": "dom", // default pragma is React.createElement
+        "pragmaFrag": "DomFrag", // default is React.Fragment
+        "throwIfNamespace": false // defaults to true
+      }
+    ]
   ];
   const plugins = [
     [
