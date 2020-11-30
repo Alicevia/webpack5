@@ -7,7 +7,7 @@ const { config } = require('./config')
 
 module.exports = merge(baseConfig, {
   mode: 'development',
-  devtool: 'cheap-module-eval-source-map',//source-map大而全  cheap-sourse-map么有列信息 单独文件
+  devtool: 'source-map',//source-map大而全  cheap-sourse-map么有列信息 单独文件
   //eval-source-map 没有单独的文件 行列信息完整 
   //inline-source-map base64格式 没有单独文件
   // cheap-module-eval-source-map dev
