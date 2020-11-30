@@ -5,6 +5,7 @@ const baseConfig = require('./webpack.base')
 const { config } = require('./config')
 
 
+
 module.exports = merge(baseConfig, {
   mode: 'development',
   devtool: 'source-map',//source-map大而全  cheap-sourse-map么有列信息 单独文件
