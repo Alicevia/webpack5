@@ -6,7 +6,7 @@ const { resolve } = require('path')
 exports.generateFileName = (pages) => {
   let filenameAry = []
   let filePath = []
-  let reg = /(.*\/)*([^.]+).(js|ts|jsx)$/ig
+  let reg = /(.*\/)*([^.]+)\.(js|ts|jsx)$/ig
   glob.sync(pages).forEach(item => {
     if (reg.test(item)) {
       filePath.push(item)
