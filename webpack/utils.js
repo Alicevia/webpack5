@@ -10,7 +10,6 @@ exports.generateFileName = (pages) => {
   glob.sync(pages).forEach(item => {
     if (reg.test(item)) {
       filePath.push(item)
-      console.log('xx', item.replace(reg, '$2'))
       filenameAry.push(item.replace(reg, '$2'))
     }
   })
@@ -55,9 +54,7 @@ exports.getEntries = (filenameAry, filePath, venders = [], dependOns = {}) => {
 }
 
 exports.getHWP = (filenameAry, dependOns, srcPath) => {
-
   const HWPAry = []
-
   filenameAry.forEach(name => {
     // if (dependOns[name]) {
     //   chunks.push(...dependOns[name], name)
@@ -73,6 +70,7 @@ exports.getHWP = (filenameAry, dependOns, srcPath) => {
         chunks: [name, ...dependOns[name] || ''],
         // excludeChunks: ['common1'], // 这里有个没有解决的问题就是 splitChunk 分离出来的包会加到所有入口中去，即使该入口中没有用到这个模块
         inject: true,
+        favicon: resolve(srcPath, './assets/image/favicon.ico'),
         minify: {
           html5: true,
           collapseWhitespace: true,
@@ -85,5 +83,4 @@ exports.getHWP = (filenameAry, dependOns, srcPath) => {
     )
   })
   return HWPAry
-
 }
