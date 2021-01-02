@@ -60,6 +60,7 @@ module.exports = merge(baseConfig, {
 
   ],
   optimization: {
+    usedExports:true,
     minimize: true,
     minimizer: [
       new TWP({
