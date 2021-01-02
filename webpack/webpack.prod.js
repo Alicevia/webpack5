@@ -61,6 +61,7 @@ module.exports = merge(baseConfig, {
   ],
   optimization: {
     minimize: true,
+    usedExports:true,
     minimizer: [
       new TWP({
         //开启多线程提升速度
