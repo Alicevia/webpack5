@@ -60,8 +60,9 @@ module.exports = merge(baseConfig, {
 
   ],
   optimization: {
-    minimize: true,
-    usedExports:true,
+    concatenateModules:true,//开启scope-hosting 作用域提升
+    usedExports:true,//标记没用的树叶
+    minimize: true,//开始tree-shaking
     minimizer: [
       new TWP({
         //开启多线程提升速度
