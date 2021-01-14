@@ -26,13 +26,26 @@ module.exports = merge(baseConfig, {
   devServer: config.dev.devServer,
   module: {
     rules: [
+      // {//antd样式处理
+      //   test: /\.css$/,
+      //   exclude: /src/,
+      //   use: [
+      //     { loader: "style-loader", },
+      //     {
+      //       loader: "css-loader",
+      //       options: {
+      //         importLoaders: 1
+      //       }
+      //     }
+      //   ]
+      // },
       {
         test: /\.css$/,
+        exclude: /node_module/,
         use: [
           'style-loader',
           'css-loader',
           'postcss-loader',
-
           // {
           //   loader: 'px2rem-loader',
           //   options: {
@@ -44,6 +57,7 @@ module.exports = merge(baseConfig, {
       },
       {
         test: /\.scss$/,
+        exclude: /node_module/,
         use: [
           'style-loader',
           'css-loader',
@@ -53,6 +67,7 @@ module.exports = merge(baseConfig, {
       },
       {
         test: /\.less$/,
+        exclude: /node_module/,
         use: [
           'style-loader',
           'css-loader',

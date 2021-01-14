@@ -15,6 +15,7 @@ const config = {
     srcPath: resolve(__dirname, '../src'),//src的绝对地址
     pagesPath: resolve(__dirname, '../src/pages/*/*'),//pages所有一级目录下的文件地址
     resolve: {
+      extensions: [],
       alias: {
         '@': resolve(__dirname, '../src')
       }
@@ -24,6 +25,7 @@ const config = {
     devServer: {
       contentBase: './dist',
       host: 'localhost',
+      liveReload: false,
       hot: true,
       open: true,
       openPage: '',//以contentBase为根文件夹
